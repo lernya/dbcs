@@ -40,24 +40,11 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="addDataButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>180</y>
-      <width>361</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Добавление информации</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="editDataButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>260</y>
+      <y>180</y>
       <width>361</width>
       <height>71</height>
      </rect>
