@@ -28,50 +28,37 @@ def connect_db(database_name):
 
 #---Отображение таблиц
 
-def clicked_expert():
-    table_model = QSqlTableModel()
-    table_model.setTable("Expert_final")
-    table_model.select()
-
-    # loading all data
-    while table_model.canFetchMore():
-        table_model.fetchMore()
-    table_model.rowCount()
-    form_show.databaseTableView.setSortingEnabled(True)
-    form_show.databaseTableView.setModel(table_model)
-    form_show.databaseTableView.resizeColumnsToContents()
-    form_show.databaseTableView.verticalHeader().setVisible(False)
-    form_show.databaseTableView.hideColumn(6)
-    form_show.databaseTableView.hideColumn(7)
-    form_show.databaseTableView.hideColumn(9)
-    form_show.databaseTableView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
-
 def clicked_region():
-    table_model = QSqlTableModel()
-    table_model.setTable("Reg_obl_city")
-    table_model.select()
+    table_model_region = QSqlTableModel()
+    table_model_region.setTable("Reg_obl_city")
+    table_model_region.select()
+    table_model_region.setHeaderData(0, Qt.Orientation.Horizontal, "Регион")
+    table_model_region.setHeaderData(1, Qt.Orientation.Horizontal, "Область")
+    table_model_region.setHeaderData(2, Qt.Orientation.Horizontal, "Город")
     # loading all data
-    while table_model.canFetchMore():
-        table_model.fetchMore()
-    table_model.rowCount()
+    while table_model_region.canFetchMore():
+        table_model_region.fetchMore()
+    table_model_region.rowCount()
     #
     form_show.databaseTableView.setSortingEnabled(True)
-    form_show.databaseTableView.setModel(table_model)
+    form_show.databaseTableView.setModel(table_model_region)
     form_show.databaseTableView.resizeColumnsToContents()
     form_show.databaseTableView.verticalHeader().setVisible(False)
     form_show.databaseTableView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
 
 def clicked_grnti():
-    table_model = QSqlTableModel()
-    table_model.setTable("grntirub")
-    table_model.select()
+    table_model_grnti = QSqlTableModel()
+    table_model_grnti.setTable("grntirub")
+    table_model_grnti.select()
+    table_model_grnti.setHeaderData(0, Qt.Orientation.Horizontal, "Код")
+    table_model_grnti.setHeaderData(1, Qt.Orientation.Horizontal, "Рубрика")
     # loading all data
-    while table_model.canFetchMore():
-        table_model.fetchMore()
-    table_model.rowCount()
+    while table_model_grnti.canFetchMore():
+        table_model_grnti.fetchMore()
+    table_model_grnti.rowCount()
     #
     form_show.databaseTableView.setSortingEnabled(True)
-    form_show.databaseTableView.setModel(table_model)
+    form_show.databaseTableView.setModel(table_model_grnti)
     form_show.databaseTableView.resizeColumnsToContents()
     form_show.databaseTableView.verticalHeader().setVisible(False)
     form_show.databaseTableView.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
@@ -484,6 +471,9 @@ def open_include_window():
 def return_to_edit_from_confirm_eg():
     window_include_eg.close()
 
+def exit_main():
+    app.closeAllWindows()
+
 app = QApplication([])
 window_main = Window_main()
 form_main = Form_main()
@@ -494,6 +484,7 @@ window_main.setWindowTitle("Главное меню")
 #form.databaseConnectButton.clicked.connect(lambda: connect_db(database_name))
 #form.showDbButton.clicked.connect()
 form_main.showDataButton.clicked.connect(open_show_window)
+form_main.exitButton.clicked.connect(exit_main)
 
 window_show = Window_show()
 form_show = Form_show()
@@ -501,7 +492,6 @@ form_show.setupUi(window_show)
 window_show.setWindowIcon(QtGui.QIcon('icon.png'))
 window_show.setWindowTitle("Отображение таблиц")
 
-form_show.ExpertTableButton.clicked.connect(clicked_expert)
 form_show.GrntiTableButton.clicked.connect(clicked_grnti)
 form_show.RegionTableButton.clicked.connect(clicked_region)
 form_show.returnToMainButton.clicked.connect(return_to_main_from_show)
