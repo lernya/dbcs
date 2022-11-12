@@ -224,7 +224,6 @@ def get_input_data():
                 window_main.show()
             elif msg.clickedButton() == buttonN:
                 msg.close()
-        # msg.setInformativeText('More information')
         else:
             insert_into_db(values)
             form_add.nameLineAdd.clear()
@@ -240,7 +239,6 @@ def get_input_data():
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setWindowTitle("Ошибка")
         msg.setText("Неверный ввод данных")
-        #msg.setInformativeText('More information')
         msg.exec()
 
 def insert_into_db(values):
@@ -305,10 +303,6 @@ def populate_edit_form():
     form_edit_row.cityRowEdit.setText(str(data[3]))
     form_edit_row.grntiRowEdit.setText(str(str(data[4])+" "+str(data[5])))
     form_edit_row.inputDateRowEdit.setText(str(data[8]))
-
-#def clicked_edit_expert():
-
-
 def edit_db_row(values):
     query = QSqlQuery("""UPDATE Expert_final 
                             SET name = '{}',
@@ -322,7 +316,6 @@ def edit_db_row(values):
                                 grnti_search = '{}' 
                             WHERE kod = {}""".format(values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8],values[9],values[0]))
     query.exec()
-
 
 def edit_row():
     kod = int(form_edit_row.kodRowEdit.text())
@@ -346,7 +339,6 @@ def edit_row():
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setWindowTitle("Ошибка")
         msg.setText("Неверный ввод данных")
-        # msg.setInformativeText('More information')
         msg.exec()
 
 def delete_selected():
@@ -506,6 +498,7 @@ def adjust_column_width(ws):
                 pass
         adjusted_width = (max_length + 2) * 1.2
         ws.column_dimensions[column].width = adjusted_width
+
 #---Переходы между окнами
 
 def open_show_window():
